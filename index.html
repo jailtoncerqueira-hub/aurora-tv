@@ -114,6 +114,14 @@ select{background:var(--bg2);border:1px solid var(--line);border-radius:999px;pa
 .ok18{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--fg)}
 .ok18 input{accent-color:#1fcf8a;width:16px;height:16px;margin:0}
 .lockerr{color:#ff8a8a!important;font-weight:600}
+.adbox{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 20px;padding:16px 18px;border:1px solid rgba(255,107,107,.35);border-radius:16px;background:var(--panel)}
+.adbox a.btn{text-decoration:none}
+.adbox span{flex:1 1 220px;color:var(--muted);font-size:13.5px}
+.adform{flex-direction:column;align-items:stretch}
+.adform b{font-family:var(--display);font-weight:600;font-size:17px}
+.adform p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.adform input[type=url]{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:0}
+.adform .btn{align-self:flex-start}
 .dest{position:relative;overflow:hidden;margin:0 0 22px;padding:24px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(120deg,rgba(61,139,255,.16),rgba(31,207,138,.08) 60%,transparent),var(--bg2);display:flex;flex-direction:column;gap:10px}
 .dest h2{font-family:var(--display);font-weight:600;font-size:clamp(22px,3vw,30px);margin:0}
 .dest-tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#2ee39b;font-weight:700}
@@ -221,6 +229,10 @@ dialog::backdrop{background:rgba(0,0,0,.7);backdrop-filter:blur(4px)}
 <script>
 const BASE='https://iptv-org.github.io/iptv/';
 const SECTIONS=[
+  {id:'classicos',name:'🎞 Domínio público', title:'Filmes de domínio público', sub:'Clássicos livres de direitos autorais, no idioma original', src:[], allLang:true,
+   feeds:['https://archivewatch.org/feeds/archivewatch.m3u'],
+   items:[{name:'A Noite dos Mortos-Vivos (1968)',group:'Terror e Suspense',url:'https://archive.org/download/NightOfTheLivingDead1968-Restored/Night%20of%20the%20Living%20Dead%20(1968).webm',logo:'',id:'',vod:true},
+          {name:'Jejum de Amor (His Girl Friday, 1940)',group:'Comédia',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/His_Girl_Friday_(1940).ogv',logo:'',id:'',vod:true}]},
   {id:'gratis',name:'✓ Grátis e legal', title:'Grátis e legal', sub:'Serviços oficiais e gratuitos com filmes, séries e novelas em português', src:null},
   {id:'br',  name:'Brasil',            title:'Brasil ao vivo',      sub:'Canais abertos brasileiros',             src:['countries/br.m3u']},
   {id:'filmes',name:'Filmes',          title:'Filmes',              sub:'Canais 24h de filmes do mundo todo',     src:['categories/movies.m3u']},
@@ -300,6 +312,26 @@ function telaSenha(){
     if(await hash($('#pin').value.trim())!==SENHA_HASH){ err.textContent='Senha incorreta. Tente de novo.'; err.hidden=false; $('#pin').value=''; $('#pin').focus(); return; }
     liberado=true; sessao.set(true); openSection(section.id); });
 }
+// Serviços oficiais mostrados na aba Adulto (abrem o site de cada um).
+const ADULTO_LINKS=[['HIDIVE · anime adulto','https://www.hidive.com/'],['Anime-Planet · catálogo','https://www.anime-planet.com/'],['Prime Video · catálogo','https://www.primevideo.com/'],['Apple TV · catálogo','https://tv.apple.com/br']];
+// Lista adulta pessoal: guardada só neste aparelho e exibida apenas com a senha.
+function renderAdultoBox(){
+  const m=store.get('aurora.adulto',null);
+  const links=`<div class="adbox"><span>Serviços oficiais (podem exigir assinatura):</span>${ADULTO_LINKS.map(([n,u])=>`<a class="btn" href="${u}" target="_blank" rel="noopener">${n} ↗</a>`).join('')}</div>`;
+  $('#destaques').innerHTML = links + (m ? `<div class="adbox"><span>Sua lista adulta está ativa${m.url?'':' (arquivo)'}.</span><button class="btn" id="adTroca">Trocar lista</button><button class="btn" id="adRemove">Remover</button></div>`
+  : `<form class="adbox adform" id="adForm"><b>Adicione sua lista adulta</b><p>Cole o link da lista M3U do serviço que você assina ou envie o arquivo. Ela fica salva só neste aparelho e só aparece depois da senha.</p>
+     <input type="url" id="adUrl" placeholder="https://…/lista.m3u" aria-label="Link da lista adulta">
+     <input type="file" id="adFile" accept=".m3u,.m3u8,.txt" aria-label="Arquivo da lista adulta">
+     <p class="lockerr" id="adErr" hidden></p><button class="btn gold" type="submit">Salvar e abrir</button></form>`);
+  if(m){ $('#adTroca').onclick=()=>{ try{localStorage.removeItem('aurora.adulto')}catch{} renderAdultoBox(); };
+    $('#adRemove').onclick=()=>{ try{localStorage.removeItem('aurora.adulto')}catch{} openSection('adulto'); }; return; }
+  $('#adForm').addEventListener('submit',async e=>{ e.preventDefault();
+    const url=$('#adUrl').value.trim(), f=$('#adFile').files[0], err=$('#adErr');
+    if(f){ const t=await f.text(); if(!t.includes('#EXTINF')){ err.textContent='Esse arquivo não parece uma lista M3U.'; err.hidden=false; return; } store.set('aurora.adulto',{text:t}); }
+    else if(/^https?:\/\//.test(url)){ delete cache[url]; store.set('aurora.adulto',{url}); }
+    else { err.textContent='Cole um link que comece com http ou escolha um arquivo.'; err.hidden=false; return; }
+    openSection('adulto'); });
+}
 function bloquear(){ liberado=false; sessao.set(false); if(playing&&playing._18){ if(hls){hls.destroy();hls=null} v.removeAttribute('src'); v.load(); playing=null; $('#idle').hidden=false; $('#nowName').textContent='Nenhum canal'; $('#nowMeta').textContent='Selecione na grade'; $('#nowLogo').innerHTML='<span class="mono">A</span>'; } if(section.lock) openSection(section.id); }
 // Destaques: obras que não passam em canal aberto. O app abre o serviço oficial onde estão disponíveis.
 const SERVICOS=[
@@ -327,7 +359,15 @@ function telaGratis(){
 const DESTAQUES=[
   {secoes:['series','m18'], titulo:'O Mentalista', info:'Série policial · 7 temporadas · dublada e legendada',
    texto:'Patrick Jane, um ex-vidente de mentira, usa sua observação afiada para ajudar a polícia da Califórnia a resolver crimes.',
-   onde:[['Netflix','https://www.netflix.com/search?q=O%20Mentalista'],['Prime Video','https://www.primevideo.com/search/?phrase=O%20Mentalista'],['HBO Max','https://www.hbomax.com/br/pt']], pago:true},
+   onde:[['Netflix','https://www.netflix.com/search?q=O%20Mentalista'],['Prime Video','https://www.primevideo.com/-/pt/detail/0FTFNMT72ZX15RUWGFEWW3N7WI'],['HBO Max','https://www.hbomax.com/br/pt'],['Apple TV','https://tv.apple.com/br/show/the-mentalist-the-series/umc.cmc.r8e7ox039l08fc5qvy4bud07']], pago:true},
+  {secoes:['m18'], titulo:'Serviços oficiais para adultos', info:'Filmes e séries para maiores · por assinatura',
+   texto:'Catálogos oficiais com produções para maiores de 18 anos.',
+   onde:[['Prime Video','https://www.primevideo.com/'],['Apple TV','https://tv.apple.com/br']], pago:true,
+   nota:'Requer assinatura de cada serviço. Abre no site ou app oficial.'},
+  {secoes:['anime'], titulo:'Mais anime', info:'HIDIVE · Anime-Planet',
+   texto:'O HIDIVE é um streaming oficial de anime. O Anime-Planet é um catálogo para descobrir títulos e ver onde assistir.',
+   onde:[['HIDIVE','https://www.hidive.com/'],['Anime-Planet','https://www.anime-planet.com/']], pago:true,
+   nota:'HIDIVE é por assinatura. Anime-Planet é um site de informações, sem vídeos.'},
   {secoes:['novelas'], titulo:'Novelas completas, grátis', info:'Dubladas · +SBT e ViX',
    texto:'A Usurpadora, Maria do Bairro, Rebelde, Marisol e outras novelas clássicas, além de novelas turcas e latinas, nos serviços oficiais e gratuitos.',
    onde:[['+SBT','https://mais.sbt.com.br/'],['ViX','https://vix.com/'],['Pluto TV','https://pluto.tv/br']]},
@@ -341,7 +381,7 @@ function renderDestaques(){
     <div class="dest-tag">${d.pago?'Em destaque · no seu streaming':'Grátis e legal'}</div>
     <h2>${esc(d.titulo)}</h2><div class="dest-info">${esc(d.info)}</div><p>${esc(d.texto)}</p>
     <div class="dest-onde">${d.onde.map(([n,u])=>`<a class="btn" href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join('')}</div>
-    ${d.pago?'<small>Requer assinatura do serviço. Não há opção gratuita oficial para esta série no Brasil.</small>':'<small>Gratuito. Abre no site ou app oficial do serviço.</small>'}</article>`).join('');
+    ${d.nota?`<small>${esc(d.nota)}</small>`:d.pago?'<small>Requer assinatura do serviço. Não há opção gratuita oficial para esta série no Brasil.</small>':'<small>Gratuito. Abre no site ou app oficial do serviço.</small>'}</article>`).join('');
 }
 let ptSet=null;
 async function loadPt(){ if(ptSet) return ptSet; try{ ptSet=new Set((await load('languages/por.m3u')).map(c=>c.url)); }catch{ ptSet=null; } return ptSet; }
@@ -376,6 +416,12 @@ async function openSection(id){
       if(!m){ current=[]; return draw('Você ainda não adicionou uma lista. Toque em “+ Minha lista IPTV” no topo.'); } }
     else { const srcs=section.id==='world'?['countries/'+country+'.m3u']:section.src;
       const parts=await Promise.allSettled(srcs.map(load));
+      if(section.items) parts.push({status:'fulfilled',value:section.items.slice()});
+      if(section.feeds){ const fp=await Promise.allSettled(section.feeds.map(load)); fp.forEach(x=>{ if(x.status==='fulfilled') x.value.forEach(c=>c.vod=true); parts.push(x); }); }
+      if(section.id==='adulto'){ renderAdultoBox(); const m=store.get('aurora.adulto',null);
+        if(m?.url){ try{ parts.push({status:'fulfilled',value:await load(m.url)}); }catch{ parts.push({status:'rejected'}); } }
+        else if(m?.text) parts.push({status:'fulfilled',value:parseM3U(m.text)});
+        if(!m){ current=[]; return draw('Cole acima o link da sua lista adulta para ver os canais aqui.'); } }
       list=parts.flatMap(p=>p.status==='fulfilled'?p.value:[]);
       if(section.filter) list=list.filter(c=>section.filter.test(c.name+' '+c.group));
       if(!list.length && parts.every(p=>p.status==='rejected')) throw 0; }
@@ -397,7 +443,7 @@ function card(c){
   const fav=favs.some(f=>f.url===c.url), initial=(c.name.match(/[A-Za-z0-9À-ú]/)||['•'])[0];
   const logo=c.logo?`<img src="${c.logo}" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'mono',textContent:'${initial}'}))">`:`<span class="mono">${initial}</span>`;
   return `<div class="card${playing&&playing.url===c.url?' on':''}" data-url="${encodeURIComponent(c.url)}" role="button" tabindex="0">
-    ${c.geo?'<span class="badge warn">RESTRITO</span>':c.hdr?'<span class="badge warn">INSTÁVEL</span>':'<span class="badge">AO VIVO</span>'}
+    ${c.geo?'<span class="badge warn">RESTRITO</span>':c.hdr?'<span class="badge warn">INSTÁVEL</span>':(c.vod?'<span class="badge">FILME</span>':'<span class="badge">AO VIVO</span>')}
     <button class="fav${fav?' yes':''}" data-fav aria-label="Favoritar">${fav?'★':'☆'}</button>
     <div class="thumb">${logo}</div>
     <div class="cap"><b>${esc(c.name)}</b><small>${flag(c)} ${esc(grupo(c.group))}</small></div></div>`;
@@ -440,7 +486,7 @@ function play(c,auto){
   if(hls){hls.destroy();hls=null}
   v.removeAttribute('src'); v.load();
   const nativeOk=!!v.canPlayType('application/vnd.apple.mpegurl');
-  const isFile=/\.(mp4|webm|ogg)(\?|$)/i.test(c.url);
+  const isFile=/\.(mp4|webm|ogg|ogv|m4v)(\?|$)/i.test(c.url);
   const native=()=>{ if(tk!==token) return; if(hls){hls.destroy();hls=null} v.src=c.url; v.play().catch(()=>{}); };
   if(!isFile && window.Hls && Hls.isSupported()){
     hls=new Hls({enableWorker:true,manifestLoadingMaxRetry:1,levelLoadingMaxRetry:1,fragLoadingMaxRetry:2});
