@@ -237,7 +237,7 @@ const SECTIONS=[
   {id:'fav',name:'★ Favoritos',        title:'Seus favoritos',      sub:'Canais que você marcou',                 src:null},
   {id:'mine',name:'Minha lista',       title:'Minha lista IPTV',    sub:'Canais da sua lista pessoal',            src:null},
   {id:'m18',name:'🔒 +18 Filmes e séries', title:'+18 · Filmes e séries', sub:'Terror, suspense, crime e ação para maiores de 18 anos', src:['categories/movies.m3u','categories/series.m3u','categories/entertainment.m3u'], filter:/terror|horror|horreur|fear|scream|zomb|crime|crim|thriller|suspense|suspens|mystery|mist[eé]rio|noir|action|a[cç][aã]o|acci[oó]n|bloody|dark|killer|true crime|investiga/i, lock:true},
-  {id:'adulto',name:'🔒 +18 Adulto',   title:'+18 · Adulto',        sub:'Conteúdo adulto, somente para maiores de 18 anos', src:['categories/xxx.m3u'], lock:true},
+  {id:'adulto',name:'🔒 +18 Adulto',   title:'+18 · Adulto',        sub:'Conteúdo adulto, somente para maiores de 18 anos', src:['categories/xxx.m3u'], lock:true, allLang:true},
 ];
 const COUNTRIES=[['br','Brasil'],['pt','Portugal'],['ao','Angola'],['mz','Moçambique'],['cv','Cabo Verde'],['gw','Guiné-Bissau'],['st','São Tomé e Príncipe'],['tl','Timor-Leste']];
 
@@ -386,7 +386,7 @@ async function openSection(id){
 }
 function filtered(){
   const q=$('#q').value.trim().toLowerCase(); let l=current;
-  if(ptSet && section.id!=='mine') l=l.filter(c=>ptSet.has(c.url));
+  if(ptSet && section.id!=='mine' && !section.allLang) l=l.filter(c=>ptSet.has(c.url));
   if(q) l=l.filter(c=>(c.name+' '+c.group).toLowerCase().includes(q));
   const s=$('#sort').value; l=[...l];
   if(s==='az') l.sort((a,b)=>a.name.localeCompare(b.name)); else if(s==='za') l.sort((a,b)=>b.name.localeCompare(a.name)); else l.sort((a,b)=>isHD(b)-isHD(a));
@@ -405,7 +405,7 @@ function card(c){
 function esc(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
 let view=[];
 function draw(emptyMsg){
-  if(!emptyMsg && current.length && section.id!=='mine' && !filtered().length) emptyMsg='Nenhum canal em português nesta seção no momento. A lista é revisada toda quarta-feira.';
+  if(!emptyMsg && current.length && section.id!=='mine' && !section.allLang && !filtered().length) emptyMsg='Nenhum canal em português nesta seção no momento. A lista é revisada toda quarta-feira.';
   view=filtered(); shown=0; $('#grid').innerHTML='';
   $('#sub').textContent=view.length?`${view.length.toLocaleString('pt-BR')} canais · ${section.sub}`:section.sub;
   if(!view.length){$('#grid').innerHTML=`<div class="empty">${emptyMsg||'Nenhum canal encontrado aqui.'}</div>`;$('#more').hidden=true;return}
