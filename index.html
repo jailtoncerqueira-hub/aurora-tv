@@ -161,7 +161,10 @@ dialog::backdrop{background:rgba(0,0,0,.7);backdrop-filter:blur(4px)}
 .field input[type=url],.field input[type=text]{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:0}
 .row{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-.sbtbtn{display:inline-flex;margin:0 0 14px;text-decoration:none}
+.sbtbox{margin:0 0 22px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--bg2)}
+.sbthead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px}
+.sbthead span{color:var(--muted,#9fb0c8);font-size:13px;flex:1}
+#sbtFrame{display:block;width:100%;height:min(80vh,820px);border:0;background:#111}
 </style>
 </head>
 <body>
@@ -364,7 +367,7 @@ const DESTAQUES=[
 ];
 function renderDestaques(){
   const ds=DESTAQUES.filter(d=>d.secoes.includes(section.id) && (!section.lock||liberado));
-  $('#destaques').innerHTML=(section.id==='novelas'?'<a class="btn gold sbtbtn" href="https://mais.sbt.com.br/" target="_blank" rel="noopener">📺 Novelas do SBT ↗</a>':'')+ds.map(d=>`<article class="dest">
+  $('#destaques').innerHTML=(section.id==='novelas'?'<div class="sbtbox"><div class="sbthead"><b>📺 Novelas do SBT</b><span>Capítulos completos, grátis, direto do +SBT</span><button class="btn" id="sbtFull" type="button">⛶ Tela cheia</button></div><iframe id="sbtFrame" src="https://mais.sbt.com.br/" title="Novelas do SBT" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>':'')+ds.map(d=>`<article class="dest">
     <div class="dest-tag">${d.pago?'Em destaque · no seu streaming':'Grátis e legal'}</div>
     <h2>${esc(d.titulo)}</h2><div class="dest-info">${esc(d.info)}</div><p>${esc(d.texto)}</p>
     <div class="dest-onde">${d.onde.map(([n,u])=>`<a class="btn" href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join('')}</div>
@@ -383,7 +386,7 @@ function tipoDe(c){ const g=(c.group||'').toLowerCase();
 function renderTipos(){
   $('#destaques').insertAdjacentHTML('beforeend',`<div class="tipos" role="group" aria-label="Tipo">${TIPOS.map(([k,n])=>`<button class="chip" data-tipo="${k}" aria-pressed="${k===tipo}">${n}</button>`).join('')}</div>`);
 }
-$('#destaques').addEventListener('click',e=>{ const b=e.target.closest('[data-tipo]'); if(!b) return; tipo=b.dataset.tipo; document.querySelectorAll('[data-tipo]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.tipo===tipo)); draw(); });
+$('#destaques').addEventListener('click',e=>{ if(e.target.closest('#sbtFull')){ const f=$('#sbtFrame'); (f.requestFullscreen||f.webkitRequestFullscreen||(()=>{})).call(f); return; } const b=e.target.closest('[data-tipo]'); if(!b) return; tipo=b.dataset.tipo; document.querySelectorAll('[data-tipo]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.tipo===tipo)); draw(); });
 Object.assign(GRUPOS,{'feature films':'Filme','animated films':'Desenho animado','silent films':'Cinema mudo','short films':'Curta','ephemeral films':'Curta','documentaries':'Documentário','newsreels':'Cinejornal','television':'Série de TV','live channels':'Canal 24h'});
 // Guia de programação: o que está passando agora (atualizado todo dia pelo robô).
 let EPG={};
