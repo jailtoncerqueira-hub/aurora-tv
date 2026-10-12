@@ -40,7 +40,8 @@ for (const p of LISTAS) {
 // Só canais em português: a lista de idioma define o que entra no app.
 const emPortugues = new Set((listas['languages/por.m3u'] || []).map(b => b.url));
 if (!emPortugues.size) { console.log('Lista de idioma indisponível; nada foi alterado.'); process.exit(1); }
-for (const p of Object.keys(listas)) listas[p] = listas[p].filter(b => emPortugues.has(b.url));
+// A aba Adulto (protegida por senha) mantém canais de todos os idiomas.
+for (const p of Object.keys(listas)) if (p !== 'categories/xxx.m3u') listas[p] = listas[p].filter(b => emPortugues.has(b.url));
 const unicos = new Map();
 for (const b of Object.values(listas).flat()) if (!unicos.has(b.url)) unicos.set(b.url, b);
 console.log(`Testando ${unicos.size} canais…`);
