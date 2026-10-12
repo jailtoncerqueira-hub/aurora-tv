@@ -248,8 +248,7 @@ const SECTIONS=[
   {id:'world',name:'Países lusófonos', title:'Países de língua portuguesa', sub:'Escolha um país',                         src:null},
   {id:'fav',name:'★ Favoritos',        title:'Seus favoritos',      sub:'Canais que você marcou',                 src:null},
   {id:'mine',name:'Minha lista',       title:'Minha lista IPTV',    sub:'Canais da sua lista pessoal',            src:null},
-  {id:'m18',name:'🔒 +18 Filmes e séries', title:'+18 · Filmes e séries', sub:'Terror, suspense, crime e ação para maiores de 18 anos', src:['categories/movies.m3u','categories/series.m3u','categories/entertainment.m3u'], filter:/terror|horror|horreur|fear|scream|zomb|crime|crim|thriller|suspense|suspens|mystery|mist[eé]rio|noir|action|a[cç][aã]o|acci[oó]n|bloody|dark|killer|true crime|investiga/i, lock:true},
-  {id:'adulto',name:'🔒 +18 Adulto',   title:'+18 · Adulto',        sub:'Conteúdo adulto, somente para maiores de 18 anos', src:['categories/xxx.m3u'], lock:true, allLang:true},
+  {id:'adulto',name:'🔒 +18', title:'+18 · Filmes, séries e adulto', sub:'Terror, suspense, crime, ação e conteúdo adulto, somente para maiores de 18 anos', src:['categories/movies.m3u','categories/series.m3u','categories/entertainment.m3u'], filter:/terror|horror|horreur|fear|scream|zomb|crime|crim|thriller|suspense|suspens|mystery|mist[eé]rio|noir|action|a[cç][aã]o|acci[oó]n|bloody|dark|killer|true crime|investiga/i, extra:['categories/xxx.m3u'], lock:true},
 ];
 const COUNTRIES=[['br','Brasil'],['pt','Portugal'],['ao','Angola'],['mz','Moçambique'],['cv','Cabo Verde'],['gw','Guiné-Bissau'],['st','São Tomé e Príncipe'],['tl','Timor-Leste']];
 
@@ -318,12 +317,12 @@ const ADULTO_LINKS=[['HIDIVE · anime adulto','https://www.hidive.com/'],['Anime
 function renderAdultoBox(){
   const m=store.get('aurora.adulto',null);
   const links=`<div class="adbox"><span>Serviços oficiais (podem exigir assinatura):</span>${ADULTO_LINKS.map(([n,u])=>`<a class="btn" href="${u}" target="_blank" rel="noopener">${n} ↗</a>`).join('')}</div>`;
-  $('#destaques').innerHTML = links + (m ? `<div class="adbox"><span>Sua lista adulta está ativa${m.url?'':' (arquivo)'}.</span><button class="btn" id="adTroca">Trocar lista</button><button class="btn" id="adRemove">Remover</button></div>`
+  $('#destaques').insertAdjacentHTML('beforeend', links + (m ? `<div class="adbox"><span>Sua lista adulta está ativa${m.url?'':' (arquivo)'}.</span><button class="btn" id="adTroca">Trocar lista</button><button class="btn" id="adRemove">Remover</button></div>`
   : `<form class="adbox adform" id="adForm"><b>Adicione sua lista adulta</b><p>Cole o link da lista M3U do serviço que você assina ou envie o arquivo. Ela fica salva só neste aparelho e só aparece depois da senha.</p>
      <input type="url" id="adUrl" placeholder="https://…/lista.m3u" aria-label="Link da lista adulta">
      <input type="file" id="adFile" accept=".m3u,.m3u8,.txt" aria-label="Arquivo da lista adulta">
-     <p class="lockerr" id="adErr" hidden></p><button class="btn gold" type="submit">Salvar e abrir</button></form>`);
-  if(m){ $('#adTroca').onclick=()=>{ try{localStorage.removeItem('aurora.adulto')}catch{} renderAdultoBox(); };
+     <p class="lockerr" id="adErr" hidden></p><button class="btn gold" type="submit">Salvar e abrir</button></form>`));
+  if(m){ $('#adTroca').onclick=()=>{ try{localStorage.removeItem('aurora.adulto')}catch{} openSection('adulto'); };
     $('#adRemove').onclick=()=>{ try{localStorage.removeItem('aurora.adulto')}catch{} openSection('adulto'); }; return; }
   $('#adForm').addEventListener('submit',async e=>{ e.preventDefault();
     const url=$('#adUrl').value.trim(), f=$('#adFile').files[0], err=$('#adErr');
@@ -357,13 +356,9 @@ function telaGratis(){
    +`<p class="srv-nota">Esses serviços abrem no navegador ou no app oficial de cada um. Na TV Samsung ou LG, procure também Samsung TV Plus e LG Channels, que já vêm instalados e são gratuitos.</p>`;
 }
 const DESTAQUES=[
-  {secoes:['series','m18'], titulo:'O Mentalista', info:'Série policial · 7 temporadas · dublada e legendada',
+  {secoes:['series'], titulo:'O Mentalista', info:'Série policial · 7 temporadas · dublada e legendada',
    texto:'Patrick Jane, um ex-vidente de mentira, usa sua observação afiada para ajudar a polícia da Califórnia a resolver crimes.',
    onde:[['Netflix','https://www.netflix.com/search?q=O%20Mentalista'],['Prime Video','https://www.primevideo.com/-/pt/detail/0FTFNMT72ZX15RUWGFEWW3N7WI'],['HBO Max','https://www.hbomax.com/br/pt'],['Apple TV','https://tv.apple.com/br/show/the-mentalist-the-series/umc.cmc.r8e7ox039l08fc5qvy4bud07']], pago:true},
-  {secoes:['m18'], titulo:'Serviços oficiais para adultos', info:'Filmes e séries para maiores · por assinatura',
-   texto:'Catálogos oficiais com produções para maiores de 18 anos.',
-   onde:[['Prime Video','https://www.primevideo.com/'],['Apple TV','https://tv.apple.com/br']], pago:true,
-   nota:'Requer assinatura de cada serviço. Abre no site ou app oficial.'},
   {secoes:['anime'], titulo:'Mais anime', info:'HIDIVE · Anime-Planet',
    texto:'O HIDIVE é um streaming oficial de anime. O Anime-Planet é um catálogo para descobrir títulos e ver onde assistir.',
    onde:[['HIDIVE','https://www.hidive.com/'],['Anime-Planet','https://www.anime-planet.com/']], pago:true,
@@ -418,12 +413,14 @@ async function openSection(id){
       const parts=await Promise.allSettled(srcs.map(load));
       if(section.items) parts.push({status:'fulfilled',value:section.items.slice()});
       if(section.feeds){ const fp=await Promise.allSettled(section.feeds.map(load)); fp.forEach(x=>{ if(x.status==='fulfilled') x.value.forEach(c=>c.vod=true); parts.push(x); }); }
+      let own=[];
       if(section.id==='adulto'){ renderAdultoBox(); const m=store.get('aurora.adulto',null);
-        if(m?.url){ try{ parts.push({status:'fulfilled',value:await load(m.url)}); }catch{ parts.push({status:'rejected'}); } }
-        else if(m?.text) parts.push({status:'fulfilled',value:parseM3U(m.text)});
-        if(!m){ current=[]; return draw('Cole acima o link da sua lista adulta para ver os canais aqui.'); } }
+        try{ if(m?.url) own=await load(m.url); else if(m?.text) own=parseM3U(m.text); }catch{}
+        if(section.extra){ const ex=await Promise.allSettled(section.extra.map(load)); ex.forEach(x=>{ if(x.status==='fulfilled') own=own.concat(x.value); }); }
+        own=own.map(c=>({...c,_own:true})); }
       list=parts.flatMap(p=>p.status==='fulfilled'?p.value:[]);
       if(section.filter) list=list.filter(c=>section.filter.test(c.name+' '+c.group));
+      list=list.concat(own);
       if(!list.length && parts.every(p=>p.status==='rejected')) throw 0; }
     await loadPt();
     if(section.lock) list.forEach(c=>c._18=true);
@@ -432,7 +429,7 @@ async function openSection(id){
 }
 function filtered(){
   const q=$('#q').value.trim().toLowerCase(); let l=current;
-  if(ptSet && section.id!=='mine' && !section.allLang) l=l.filter(c=>ptSet.has(c.url));
+  if(ptSet && section.id!=='mine' && !section.allLang) l=l.filter(c=>c._own||ptSet.has(c.url));
   if(q) l=l.filter(c=>(c.name+' '+c.group).toLowerCase().includes(q));
   const s=$('#sort').value; l=[...l];
   if(s==='az') l.sort((a,b)=>a.name.localeCompare(b.name)); else if(s==='za') l.sort((a,b)=>b.name.localeCompare(a.name)); else l.sort((a,b)=>isHD(b)-isHD(a));
