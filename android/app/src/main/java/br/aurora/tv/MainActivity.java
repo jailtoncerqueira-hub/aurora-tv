@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.CookieManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -46,6 +47,9 @@ public class MainActivity extends Activity {
         s.setLoadWithOverviewMode(true);
         s.setUseWideViewPort(true);
         s.setUserAgentString(s.getUserAgentString().replace("; wv", ""));
+        // Cadastro do +SBT dentro da aba Novelas (site aberto dentro do app)
+        CookieManager.getInstance().setAcceptCookie(true);
+        CookieManager.getInstance().setAcceptThirdPartyCookies(web, true);
 
         final WebViewAssetLoader loader = new WebViewAssetLoader.Builder()
                 .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))
@@ -60,6 +64,8 @@ public class MainActivity extends Activity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 // Links de streamings (Netflix, Prime Video, HBO Max) abrem no app ou navegador do aparelho
+                // Navegação dentro de quadros (ex.: +SBT na aba Novelas) fica dentro do app
+                if (!request.isForMainFrame()) return false;
                 Uri u = request.getUrl();
                 String app = BuildConfig.APP_URL;
                 boolean interno = u.toString().startsWith("https://appassets") || (!app.isEmpty() && u.toString().startsWith(app));
