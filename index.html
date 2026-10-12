@@ -453,7 +453,7 @@ let view=[];
 function draw(emptyMsg){
   if(!emptyMsg && current.length && section.id!=='mine' && !section.allLang && !filtered().length) emptyMsg='Nenhum canal em português nesta seção no momento. A lista é revisada toda quarta-feira.';
   view=filtered(); shown=0; $('#grid').innerHTML='';
-  $('#sub').textContent=view.length?`${view.length.toLocaleString('pt-BR')} canais · ${section.sub}`:section.sub;
+  $('#sub').textContent=view.length?`${view.length.toLocaleString('pt-BR')} ${section.feeds?'títulos':'canais'} · ${section.sub}`:section.sub;
   if(!view.length){$('#grid').innerHTML=`<div class="empty">${emptyMsg||'Nenhum canal encontrado aqui.'}</div>`;$('#more').hidden=true;return}
   more();
 }
@@ -497,7 +497,7 @@ function play(c,auto){
     hls.on(Hls.Events.MANIFEST_PARSED,()=>{ ptTracks(); v.play().catch(()=>{}); });
     hls.on(Hls.Events.AUDIO_TRACKS_UPDATED,ptTracks); hls.on(Hls.Events.SUBTITLE_TRACKS_UPDATED,ptTracks);
   } else native();
-  watchdog=setTimeout(()=>{ if(tk===token && (v.paused||v.readyState<3)) fail(tk); },15000);
+  watchdog=setTimeout(()=>{ if(tk===token && (v.paused||v.readyState<3)) fail(tk); },c.vod?45000:15000);
   if(!auto) window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
 }
 function ptTracks(){ if(!hls) return; const isPt=t=>/^(pt|por)/i.test(t.lang||'')||/portugu/i.test(t.name||'');
