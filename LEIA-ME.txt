@@ -1,0 +1,31 @@
+AURORA TV - LINK FIXO E ATUALIZACAO TODA QUARTA-FEIRA
+
+COMO FUNCIONA
+- O app fica hospedado de graca no GitHub Pages, num link fixo:
+  https://SEU-USUARIO.github.io/aurora-tv/
+- Toda quarta-feira, as 6h da manha, um robo do GitHub testa todos os canais
+  e deixa so os que estao no ar. Voce nao precisa fazer nada.
+- Celulares, TV Box e PCs abrem sempre esse mesmo link, entao todos recebem a
+  atualizacao sozinhos na proxima vez que abrirem o app.
+- Quando voce pedir uma melhoria ao Claude, basta trocar o arquivo index.html
+  no GitHub: todos os aparelhos recebem a nova versao.
+
+PASSO A PASSO (uma vez so, uns 10 minutos)
+1. Entre em github.com e crie um repositorio PUBLICO chamado: aurora-tv
+2. Clique em "uploading an existing file", arraste TODO o conteudo desta pasta
+   (inclusive a pasta .github) e clique em "Commit changes".
+3. Va em Settings > Pages. Em "Branch" escolha "main" e pasta "/ (root)". Salve.
+   Em 1 a 2 minutos o link https://SEU-USUARIO.github.io/aurora-tv/ funciona.
+4. Va em Settings > Actions > General > "Workflow permissions" e marque
+   "Read and write permissions". Salve. (Necessario para o robo gravar a lista.)
+5. Va na aba Actions > "Atualizar canais" > "Run workflow" para fazer a primeira
+   verificacao agora (leva uns 15 a 30 minutos).
+6. Na aba Actions > "Gerar APK" > "Run workflow". Quando ficar verde, baixe o
+   "AuroraTV-apk" e instale nos celulares e TV Box.
+
+NO PC: abra o link fixo no Chrome e salve nos favoritos (ou menu > Instalar).
+NO ANDROID: instale o APK. Ele abre o link fixo e, sem internet, usa uma copia
+guardada dentro do proprio app.
+
+ATENCAO: o APK so precisa ser reinstalado se o Claude mudar algo dentro da
+pasta "android". Mudancas no index.html chegam sozinhas.
