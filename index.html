@@ -53,6 +53,10 @@ header{position:sticky;top:0;z-index:30;padding-top:env(safe-area-inset-top,0px)
 .chip.adult{border-color:rgba(255,107,107,.45);color:#ff9a9a}
 .chip.free{border-color:rgba(46,227,155,.5);color:#2ee39b}
 .rail::-webkit-scrollbar{display:none}
+.railgrp{flex:none;align-self:center;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);padding:0 2px 0 8px}
+.railgrp:first-child{padding-left:0}
+.tipos{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.prog{display:block;margin-top:4px;font-size:11.5px;color:#7fe3b6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .chip{flex:none;border:1px solid var(--line);background:transparent;border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--muted);transition:.2s;white-space:nowrap}
 .chip:hover{color:var(--fg)}
 .chip[aria-pressed="true"]{color:#fff;background:rgba(61,139,255,.16);border-color:var(--gold);box-shadow:inset 0 -2px 0 var(--gold2)}
@@ -78,7 +82,7 @@ video{width:100%;height:100%;display:block;background:#000}
 .nowlogo{width:64px;height:64px;flex:none;border-radius:14px;background:#fff;display:grid;place-items:center;overflow:hidden;padding:8px}
 .nowlogo img{max-height:100%;object-fit:contain}
 .nowname{font-family:var(--display);font-weight:600;font-size:18px;line-height:1.2;overflow-wrap:anywhere}
-.nowmeta{color:var(--muted);font-size:13px;margin-top:4px}
+.nowmeta{color:var(--muted);font-size:13px;margin-top:4px;white-space:pre-line;line-height:1.45}
 .ctrls{display:flex;gap:8px;flex-wrap:wrap}
 .tip{font-size:12.5px;color:var(--dim);line-height:1.55;padding:0 4px}
 
@@ -229,24 +233,25 @@ dialog::backdrop{background:rgba(0,0,0,.7);backdrop-filter:blur(4px)}
 <script>
 const BASE='https://iptv-org.github.io/iptv/';
 const SECTIONS=[
-  {id:'classicos',name:'🎞 Domínio público', title:'Filmes de domínio público', sub:'Clássicos livres de direitos autorais, no idioma original', src:[], allLang:true,
-   feeds:['https://archivewatch.org/feeds/archivewatch.m3u'],
-   items:[{name:'A Noite dos Mortos-Vivos (1968)',group:'Terror e Suspense',url:'https://archive.org/download/NightOfTheLivingDead1968-Restored/Night%20of%20the%20Living%20Dead%20(1968).webm',logo:'',id:'',vod:true},
-          {name:'Jejum de Amor (His Girl Friday, 1940)',group:'Comédia',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/His_Girl_Friday_(1940).ogv',logo:'',id:'',vod:true}]},
-  {id:'gratis',name:'✓ Grátis e legal', title:'Grátis e legal', sub:'Serviços oficiais e gratuitos com filmes, séries e novelas em português', src:null},
   {id:'br',  name:'Brasil',            title:'Brasil ao vivo',      sub:'Canais abertos brasileiros',             src:['countries/br.m3u']},
-  {id:'filmes',name:'Filmes',          title:'Filmes',              sub:'Canais 24h de filmes do mundo todo',     src:['categories/movies.m3u']},
-  {id:'series',name:'Séries',          title:'Séries',              sub:'Canais dedicados a séries',              src:['categories/series.m3u']},
-  {id:'novelas',name:'Novelas',        title:'Novelas',             sub:'Novelas e dramas em canais abertos',     src:['countries/br.m3u','countries/pt.m3u','countries/mx.m3u','categories/series.m3u','categories/entertainment.m3u'], filter:/novela|telenovela|drama|dorama|turca|caracol|televisa|tlnovela/i},
-  {id:'anime',name:'Anime',            title:'Anime',               sub:'Canais de anime e animação japonesa',    src:['categories/animation.m3u','categories/kids.m3u'], filter:/anim[eé]|otaku|naruto|japan|crunch|toon/i},
-  {id:'desenhos',name:'Desenhos',      title:'Desenhos e animação', sub:'Animação para todas as idades',          src:['categories/animation.m3u']},
+  {id:'filmes',name:'Filmes',          title:'Filmes · ao vivo',              sub:'Canais 24h de filmes do mundo todo',     src:['categories/movies.m3u']},
+  {id:'series',name:'Séries',          title:'Séries · ao vivo',              sub:'Canais dedicados a séries',              src:['categories/series.m3u']},
+  {id:'novelas',name:'Novelas',        title:'Novelas · ao vivo',             sub:'Novelas e dramas em canais abertos',     src:['countries/br.m3u','countries/pt.m3u','countries/mx.m3u','categories/series.m3u','categories/entertainment.m3u'], filter:/novela|telenovela|drama|dorama|turca|caracol|televisa|tlnovela/i},
+  {id:'anime',name:'Anime',            title:'Anime · ao vivo',               sub:'Canais de anime e animação japonesa',    src:['categories/animation.m3u','categories/kids.m3u'], filter:/anim[eé]|otaku|naruto|japan|crunch|toon/i},
+  {id:'desenhos',name:'Desenhos',      title:'Desenhos e animação · ao vivo', sub:'Animação para todas as idades',          src:['categories/animation.m3u']},
   {id:'kids',name:'Infantil',          title:'Infantil',            sub:'Programação para crianças',              src:['categories/kids.m3u']},
   {id:'news',name:'Notícias',          title:'Notícias',            sub:'Jornalismo 24 horas',                    src:['categories/news.m3u']},
   {id:'sports',name:'Esportes',        title:'Esportes',            sub:'Canais esportivos abertos',              src:['categories/sports.m3u']},
   {id:'docs',name:'Documentários',     title:'Documentários',       sub:'Natureza, história e ciência',           src:['categories/documentary.m3u']},
   {id:'music',name:'Música',           title:'Música',              sub:'Clipes e shows',                         src:['categories/music.m3u']},
+  {id:'classicos24',name:'🎞 Clássicos 24h', title:'Clássicos 24h · ao vivo', sub:'Canais que passam filmes e séries antigas o dia todo, no idioma original', src:['classicos-aovivo.m3u'], allLang:true, fallback:'https://archivewatch.org/feeds/archivewatch.m3u', live:true},
   {id:'world',name:'Países lusófonos', title:'Países de língua portuguesa', sub:'Escolha um país',                         src:null},
-  {id:'fav',name:'★ Favoritos',        title:'Seus favoritos',      sub:'Canais que você marcou',                 src:null},
+  {id:'sobdemanda',grupo:'Sob demanda',name:'🎬 Filmes e séries', title:'Sob demanda · filmes, séries e desenhos', sub:'Assista quando quiser: clássicos de domínio público, no idioma original', src:['sobdemanda.m3u'], allLang:true, vod:true,
+   fallback:'https://archivewatch.org/feeds/archivewatch.m3u',
+   items:[{name:'A Noite dos Mortos-Vivos (1968)',group:'Feature Films',url:'https://archive.org/download/NightOfTheLivingDead1968-Restored/Night%20of%20the%20Living%20Dead%20(1968).webm',logo:'',id:'',vod:true},
+          {name:'Jejum de Amor (His Girl Friday, 1940)',group:'Feature Films',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/His_Girl_Friday_(1940).ogv',logo:'',id:'',vod:true}]},
+  {id:'gratis',grupo:'Sob demanda',name:'✓ Grátis e legal', title:'Grátis e legal', sub:'Serviços oficiais e gratuitos com filmes, séries e novelas em português', src:null},
+  {id:'fav',grupo:'Meus',name:'★ Favoritos',        title:'Seus favoritos',      sub:'Canais que você marcou',                 src:null},
   {id:'mine',name:'Minha lista',       title:'Minha lista IPTV',    sub:'Canais da sua lista pessoal',            src:null},
   {id:'adulto',name:'🔒 +18', title:'+18 · Filmes, séries e adulto', sub:'Terror, suspense, crime, ação e conteúdo adulto, somente para maiores de 18 anos', src:['categories/movies.m3u','categories/series.m3u','categories/entertainment.m3u'], filter:/terror|horror|horreur|fear|scream|zomb|crime|crim|thriller|suspense|suspens|mystery|mist[eé]rio|noir|action|a[cç][aã]o|acci[oó]n|bloody|dark|killer|true crime|investiga/i, extra:['categories/xxx.m3u'], lock:true},
 ];
@@ -382,11 +387,30 @@ let ptSet=null;
 async function loadPt(){ if(ptSet) return ptSet; try{ ptSet=new Set((await load('languages/por.m3u')).map(c=>c.url)); }catch{ ptSet=null; } return ptSet; }
 const GRUPOS={animation:'Animação',kids:'Infantil',movies:'Filmes',series:'Séries',news:'Notícias',sports:'Esportes',music:'Música',documentary:'Documentários',entertainment:'Entretenimento',general:'Variedades',religious:'Religioso',education:'Educação',comedy:'Comédia',classic:'Clássicos',culture:'Cultura',family:'Família',lifestyle:'Estilo de vida',cooking:'Culinária',travel:'Viagem',outdoor:'Ar livre',science:'Ciência',business:'Negócios',legislative:'Legislativo',weather:'Clima',auto:'Automóveis',shop:'Compras',relax:'Relaxar',undefined:'Variedades',public:'Público',interactive:'Interativo'};
 function grupo(g){ if(!g) return 'Canal aberto'; return g.split(';').map(x=>GRUPOS[x.trim().toLowerCase()]||x.trim()).join(' · '); }
+// Tipos do catálogo sob demanda (o catálogo usa nomes em inglês).
+const TIPOS=[['todos','Todos'],['filmes','Filmes'],['series','Séries de TV'],['desenhos','Desenhos'],['mudos','Cinema mudo'],['curtas','Curtas'],['docs','Documentários']];
+let tipo='todos';
+function tipoDe(c){ const g=(c.group||'').toLowerCase();
+  if(g==='feature films') return 'filmes'; if(g==='animated films') return 'desenhos'; if(g==='silent films') return 'mudos';
+  if(g==='short films'||g==='ephemeral films') return 'curtas'; if(g==='documentaries'||g==='newsreels') return 'docs'; return 'series'; }
+function renderTipos(){
+  $('#destaques').insertAdjacentHTML('beforeend',`<div class="tipos" role="group" aria-label="Tipo">${TIPOS.map(([k,n])=>`<button class="chip" data-tipo="${k}" aria-pressed="${k===tipo}">${n}</button>`).join('')}</div>`);
+}
+$('#destaques').addEventListener('click',e=>{ const b=e.target.closest('[data-tipo]'); if(!b) return; tipo=b.dataset.tipo; document.querySelectorAll('[data-tipo]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.tipo===tipo)); draw(); });
+Object.assign(GRUPOS,{'feature films':'Filme','animated films':'Desenho animado','silent films':'Cinema mudo','short films':'Curta','ephemeral films':'Curta','documentaries':'Documentário','newsreels':'Cinejornal','television':'Série de TV','live channels':'Canal 24h'});
+// Guia de programação: o que está passando agora (atualizado todo dia pelo robô).
+let EPG={};
+async function carregarGuia(){ try{ const r=await fetch('guia/agora.json',{cache:'no-cache'}); if(r.ok) EPG=(await r.json()).canais||{}; }catch{} atualizarProg(); }
+function progDe(c){ const p=c&&c.id&&EPG[c.id]; if(!p) return null; const m=Date.now()/60000; const i=p.findIndex(x=>x[0]<=m&&m<x[1]); return i<0?null:{agora:p[i],depois:p[i+1]}; }
+const hora=min=>new Date(min*60000).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+function atualizarProg(){ document.querySelectorAll('.card').forEach(el=>{ const c=view.find(x=>encodeURIComponent(x.url)===el.dataset.url); const p=progDe(c); let s=el.querySelector('.prog');
+    if(p){ if(!s){ s=document.createElement('small'); s.className='prog'; el.querySelector('.cap').appendChild(s);} s.textContent='▶ '+p.agora[2]; } else if(s) s.remove(); }); updateNow(); }
+setInterval(atualizarProg,60000);
 function risk(c){return (c.geo?4:0)+(c.hdr?3:0)+(c.part?1:0)}
 function isHD(c){return /1080|720|\bHD\b|4K/i.test(c.name)}
 
 function renderRail(){
-  $('#rail').innerHTML=SECTIONS.map(s=>`<button class="chip${s.lock?' adult':''}${s.id==='gratis'?' free':''}" data-id="${s.id}" aria-pressed="${s.id===section.id}">${s.name}</button>`).join('');
+  let g0=''; $('#rail').innerHTML=SECTIONS.map(s=>{ const g=s.grupo||(['mine','adulto'].includes(s.id)?'Meus':'Ao vivo'); const rot=g!==g0?`<span class="railgrp">${g}</span>`:''; g0=g; return rot+`<button class="chip${s.lock?' adult':''}${s.id==='gratis'?' free':''}" data-id="${s.id}" aria-pressed="${s.id===section.id}">${s.name}</button>`; }).join('');
 }
 $('#rail').addEventListener('click',e=>{const b=e.target.closest('.chip');if(b)openSection(b.dataset.id)});
 $('#country').innerHTML=COUNTRIES.map(([c,n])=>`<option value="${c}">${n}</option>`).join('');
@@ -399,7 +423,7 @@ async function openSection(id){
   $('#sub').textContent='Carregando…';
   $('#grid').innerHTML=Array(12).fill('<div class="skel"></div>').join(''); $('#more').hidden=true;
   try{
-    renderDestaques();
+    renderDestaques(); document.querySelector('.ptonly').hidden=!!section.allLang||section.id==='mine';
     $('#sort').hidden=section.id==='gratis'; $('#grid').classList.toggle('wide',section.id==='gratis');
     if(section.id==='gratis') return telaGratis();
     if(section.lock && !liberado){ $('#lockBtn').hidden=true; return telaSenha(); }
@@ -411,6 +435,7 @@ async function openSection(id){
       if(!m){ current=[]; return draw('Você ainda não adicionou uma lista. Toque em “+ Minha lista IPTV” no topo.'); } }
     else { const srcs=section.id==='world'?['countries/'+country+'.m3u']:section.src;
       const parts=await Promise.allSettled(srcs.map(load));
+      if(section.fallback && !parts.some(p=>p.status==='fulfilled'&&p.value.length)){ try{ const all=await load(section.fallback); parts.push({status:'fulfilled',value:all.filter(c=>section.live?c.group==='Live Channels':c.group!=='Live Channels'&&/\.(mp4|m4v|webm)(\?|$)/i.test(c.url))}); }catch{} }
       if(section.items) parts.push({status:'fulfilled',value:section.items.slice()});
       if(section.feeds){ const fp=await Promise.allSettled(section.feeds.map(load)); fp.forEach(x=>{ if(x.status==='fulfilled') x.value.forEach(c=>c.vod=true); parts.push(x); }); }
       let own=[];
@@ -424,12 +449,14 @@ async function openSection(id){
       if(!list.length && parts.every(p=>p.status==='rejected')) throw 0; }
     await loadPt();
     if(section.lock) list.forEach(c=>c._18=true);
+    if(section.vod){ list.forEach(c=>c.vod=true); renderTipos(); }
     current=dedupe(list); draw();
   }catch(e){ current=[]; draw('Não foi possível carregar a lista. Verifique sua conexão e tente de novo.'); }
 }
 function filtered(){
   const q=$('#q').value.trim().toLowerCase(); let l=current;
   if(ptSet && section.id!=='mine' && !section.allLang) l=l.filter(c=>c._own||ptSet.has(c.url));
+  if(section.vod && tipo!=='todos') l=l.filter(c=>tipoDe(c)===tipo);
   if(q) l=l.filter(c=>(c.name+' '+c.group).toLowerCase().includes(q));
   const s=$('#sort').value; l=[...l];
   if(s==='az') l.sort((a,b)=>a.name.localeCompare(b.name)); else if(s==='za') l.sort((a,b)=>b.name.localeCompare(a.name)); else l.sort((a,b)=>isHD(b)-isHD(a));
@@ -443,14 +470,14 @@ function card(c){
     ${c.geo?'<span class="badge warn">RESTRITO</span>':c.hdr?'<span class="badge warn">INSTÁVEL</span>':(c.vod?'<span class="badge">FILME</span>':'<span class="badge">AO VIVO</span>')}
     <button class="fav${fav?' yes':''}" data-fav aria-label="Favoritar">${fav?'★':'☆'}</button>
     <div class="thumb">${logo}</div>
-    <div class="cap"><b>${esc(c.name)}</b><small>${flag(c)} ${esc(grupo(c.group))}</small></div></div>`;
+    <div class="cap"><b>${esc(c.name)}</b><small>${flag(c)} ${esc(grupo(c.group))}</small>${(p=>p?`<small class="prog">▶ ${esc(p.agora[2])}</small>`:'')(progDe(c))}</div></div>`;
 }
 function esc(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
 let view=[];
 function draw(emptyMsg){
   if(!emptyMsg && current.length && section.id!=='mine' && !section.allLang && !filtered().length) emptyMsg='Nenhum canal em português nesta seção no momento. A lista é revisada toda quarta-feira.';
   view=filtered(); shown=0; $('#grid').innerHTML='';
-  $('#sub').textContent=view.length?`${view.length.toLocaleString('pt-BR')} ${section.feeds?'títulos':'canais'} · ${section.sub}`:section.sub;
+  $('#sub').textContent=view.length?`${view.length.toLocaleString('pt-BR')} ${section.vod?'títulos':'canais'} · ${section.sub}`:section.sub;
   if(!view.length){$('#grid').innerHTML=`<div class="empty">${emptyMsg||'Nenhum canal encontrado aqui.'}</div>`;$('#more').hidden=true;return}
   more();
 }
@@ -516,7 +543,7 @@ $('#next').onclick=()=>step(1); $('#prev').onclick=()=>step(-1); $('#skip').oncl
 $('#favNow').onclick=()=>toggleFav(playing);
 function updateNow(){
   if(!playing) return;
-  $('#nowName').textContent=playing.name; $('#nowMeta').textContent=[flag(playing),grupo(playing.group),playing.geo?'· restrito por país':''].join(' ');
+  $('#nowName').textContent=playing.name; const pr=progDe(playing); $('#nowMeta').textContent=[flag(playing),grupo(playing.group),playing.geo?'· restrito por país':''].join(' ')+(pr?`\nAgora: ${pr.agora[2]} (até ${hora(pr.agora[1])})`+(pr.depois?`\nA seguir: ${pr.depois[2]} às ${hora(pr.depois[0])}`:''):'');
   $('#nowLogo').innerHTML=playing.logo?`<img src="${playing.logo}" alt="">`:`<span class="mono">${esc(playing.name[0])}</span>`;
   const f=favs.some(x=>x.url===playing.url); $('#favNow').textContent=f?'★ Favorito':'☆ Favoritar';
 }
@@ -535,6 +562,7 @@ $('#saveList').onclick=async()=>{
 $('#clearList').onclick=()=>{try{localStorage.removeItem('aurora.mine')}catch{} dlg.close(); if(section.id==='mine')openSection('mine')};
 
 $('#lockBtn').onclick=bloquear;
+carregarGuia();
 renderRail(); { const ini=store.get('aurora.sec','br'); openSection(SECTIONS.find(x=>x.id===ini&&!x.lock)?ini:'br'); }
 </script>
 </body>
