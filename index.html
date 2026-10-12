@@ -161,6 +161,7 @@ dialog::backdrop{background:rgba(0,0,0,.7);backdrop-filter:blur(4px)}
 .field input[type=url],.field input[type=text]{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:0}
 .row{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.sbtbtn{display:inline-flex;margin:0 0 14px;text-decoration:none}
 </style>
 </head>
 <body>
@@ -363,7 +364,7 @@ const DESTAQUES=[
 ];
 function renderDestaques(){
   const ds=DESTAQUES.filter(d=>d.secoes.includes(section.id) && (!section.lock||liberado));
-  $('#destaques').innerHTML=ds.map(d=>`<article class="dest">
+  $('#destaques').innerHTML=(section.id==='novelas'?'<a class="btn gold sbtbtn" href="https://mais.sbt.com.br/" target="_blank" rel="noopener">📺 Novelas do SBT ↗</a>':'')+ds.map(d=>`<article class="dest">
     <div class="dest-tag">${d.pago?'Em destaque · no seu streaming':'Grátis e legal'}</div>
     <h2>${esc(d.titulo)}</h2><div class="dest-info">${esc(d.info)}</div><p>${esc(d.texto)}</p>
     <div class="dest-onde">${d.onde.map(([n,u])=>`<a class="btn" href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join('')}</div>
