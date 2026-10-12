@@ -61,5 +61,43 @@ for (const [p, bs] of Object.entries(listas)) {
   const arq = 'lista/' + p; await mkdir(dirname(arq), { recursive: true });
   await writeFile(arq, '#EXTM3U\n' + vivos.map(b => b.linhas.join('\n') + '\n' + b.url).join('\n') + '\n');
 }
-await writeFile('lista/atualizado.json', JSON.stringify({ data: new Date().toISOString(), testados: unicos.size, online }, null, 2));
 console.log(`Pronto: ${online} de ${unicos.size} canais no ar.`);
+
+// ---------- Sob demanda: catálogo de domínio público (Archive Watch) ----------
+// Testa cada título e grava só os que ainda existem. Canais 24h do catálogo vão para lista/classicos-aovivo.m3u.
+let vodTotal = 0, vodOk = 0;
+try {
+  const r = await fetch('https://archivewatch.org/feeds/archivewatch.m3u');
+  if (!r.ok) throw new Error('status ' + r.status);
+  const todos = blocos(await r.text());
+  const aoVivo = todos.filter(b => /group-title="Live Channels"/.test(b.linhas[0]));
+  const vod = todos.filter(b => !/group-title="Live Channels"/.test(b.linhas[0]) && /\.(mp4|m4v|webm)(\?|$)/i.test(b.url));
+  vodTotal = vod.length;
+  const vivosLive = [];
+  for (const b of aoVivo) if (await testar(b.url, '')) vivosLive.push(b);
+  await writeFile('lista/classicos-aovivo.m3u', '#EXTM3U\n' + vivosLive.map(b => b.linhas.join('\n') + '\n' + b.url).join('\n') + '\n');
+  console.log(`Clássicos 24h: ${vivosLive.length} de ${aoVivo.length} no ar.`);
+
+  async function existe(url) {
+    for (let tentativa = 0; tentativa < 2; tentativa++) {
+      const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 15000);
+      try {
+        const res = await fetch(url, { method: 'HEAD', redirect: 'follow', signal: ctl.signal, headers: { 'User-Agent': UA } });
+        if (res.status === 404 || res.status === 410 || res.status === 403) return false;
+        if (res.status === 429 || res.status >= 500) { await new Promise(r => setTimeout(r, 3000)); continue; }
+        const tipo = (res.headers.get('content-type') || '').toLowerCase();
+        return res.ok && (!tipo || /video|octet-stream/.test(tipo));
+      } catch { /* tenta de novo */ } finally { clearTimeout(t); }
+    }
+    return true; // sem resposta clara: mantém o título
+  }
+  const ok = new Set(); const fila2 = [...vod]; let n = 0;
+  await Promise.all(Array.from({ length: 24 }, async () => {
+    while (fila2.length) { const b = fila2.pop(); if (await existe(b.url)) ok.add(b.url); if (++n % 2000 === 0) console.log(`sob demanda ${n}/${vod.length}`); }
+  }));
+  const bons = vod.filter(b => ok.has(b.url)); vodOk = bons.length;
+  await writeFile('lista/sobdemanda.m3u', '#EXTM3U\n' + bons.map(b => b.linhas.join('\n') + '\n' + b.url).join('\n') + '\n');
+  console.log(`Sob demanda: ${vodOk} de ${vodTotal} títulos disponíveis.`);
+} catch (e) { console.log('Sob demanda não atualizado:', e.message); }
+
+await writeFile('lista/atualizado.json', JSON.stringify({ data: new Date().toISOString(), testados: unicos.size, online, sobDemanda: vodOk, sobDemandaTestados: vodTotal }, null, 2));
