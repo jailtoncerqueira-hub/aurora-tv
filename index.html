@@ -250,7 +250,6 @@ const SECTIONS=[
    fallback:'https://archivewatch.org/feeds/archivewatch.m3u',
    items:[{name:'A Noite dos Mortos-Vivos (1968)',group:'Feature Films',url:'https://archive.org/download/NightOfTheLivingDead1968-Restored/Night%20of%20the%20Living%20Dead%20(1968).webm',logo:'',id:'',vod:true},
           {name:'Jejum de Amor (His Girl Friday, 1940)',group:'Feature Films',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/His_Girl_Friday_(1940).ogv',logo:'',id:'',vod:true}]},
-  {id:'gratis',grupo:'Sob demanda',name:'✓ Grátis e legal', title:'Grátis e legal', sub:'Serviços oficiais e gratuitos com filmes, séries e novelas em português', src:null},
   {id:'fav',grupo:'Meus',name:'★ Favoritos',        title:'Seus favoritos',      sub:'Canais que você marcou',                 src:null},
   {id:'mine',name:'Minha lista',       title:'Minha lista IPTV',    sub:'Canais da sua lista pessoal',            src:null},
   {id:'adulto',name:'🔒 +18', title:'+18 · Filmes, séries e adulto', sub:'Terror, suspense, crime, ação e conteúdo adulto, somente para maiores de 18 anos', src:['categories/movies.m3u','categories/series.m3u','categories/entertainment.m3u'], filter:/terror|horror|horreur|fear|scream|zomb|crime|crim|thriller|suspense|suspens|mystery|mist[eé]rio|noir|action|a[cç][aã]o|acci[oó]n|bloody|dark|killer|true crime|investiga/i, extra:['categories/xxx.m3u'], lock:true},
@@ -321,7 +320,7 @@ const ADULTO_LINKS=[['HIDIVE · anime adulto','https://www.hidive.com/'],['Anime
 // Lista adulta pessoal: guardada só neste aparelho e exibida apenas com a senha.
 function renderAdultoBox(){
   const m=store.get('aurora.adulto',null);
-  const links=`<div class="adbox"><span>Serviços oficiais (podem exigir assinatura):</span>${ADULTO_LINKS.map(([n,u])=>`<a class="btn" href="${u}" target="_blank" rel="noopener">${n} ↗</a>`).join('')}</div>`;
+  const links='';
   $('#destaques').insertAdjacentHTML('beforeend', links + (m ? `<div class="adbox"><span>Sua lista adulta está ativa${m.url?'':' (arquivo)'}.</span><button class="btn" id="adTroca">Trocar lista</button><button class="btn" id="adRemove">Remover</button></div>`
   : `<form class="adbox adform" id="adForm"><b>Adicione sua lista adulta</b><p>Cole o link da lista M3U do serviço que você assina ou envie o arquivo. Ela fica salva só neste aparelho e só aparece depois da senha.</p>
      <input type="url" id="adUrl" placeholder="https://…/lista.m3u" aria-label="Link da lista adulta">
@@ -361,19 +360,6 @@ function telaGratis(){
    +`<p class="srv-nota">Esses serviços abrem no navegador ou no app oficial de cada um. Na TV Samsung ou LG, procure também Samsung TV Plus e LG Channels, que já vêm instalados e são gratuitos.</p>`;
 }
 const DESTAQUES=[
-  {secoes:['series'], titulo:'O Mentalista', info:'Série policial · 7 temporadas · dublada e legendada',
-   texto:'Patrick Jane, um ex-vidente de mentira, usa sua observação afiada para ajudar a polícia da Califórnia a resolver crimes.',
-   onde:[['Netflix','https://www.netflix.com/search?q=O%20Mentalista'],['Prime Video','https://www.primevideo.com/-/pt/detail/0FTFNMT72ZX15RUWGFEWW3N7WI'],['HBO Max','https://www.hbomax.com/br/pt'],['Apple TV','https://tv.apple.com/br/show/the-mentalist-the-series/umc.cmc.r8e7ox039l08fc5qvy4bud07']], pago:true},
-  {secoes:['anime'], titulo:'Mais anime', info:'HIDIVE · Anime-Planet',
-   texto:'O HIDIVE é um streaming oficial de anime. O Anime-Planet é um catálogo para descobrir títulos e ver onde assistir.',
-   onde:[['HIDIVE','https://www.hidive.com/'],['Anime-Planet','https://www.anime-planet.com/']], pago:true,
-   nota:'HIDIVE é por assinatura. Anime-Planet é um site de informações, sem vídeos.'},
-  {secoes:['novelas'], titulo:'Novelas completas, grátis', info:'Dubladas · +SBT e ViX',
-   texto:'A Usurpadora, Maria do Bairro, Rebelde, Marisol e outras novelas clássicas, além de novelas turcas e latinas, nos serviços oficiais e gratuitos.',
-   onde:[['+SBT','https://mais.sbt.com.br/'],['ViX','https://vix.com/'],['Pluto TV','https://pluto.tv/br']]},
-  {secoes:['filmes','series'], titulo:'Mais filmes e séries grátis', info:'Serviços oficiais · com anúncios',
-   texto:'Além dos canais ao vivo abaixo, estes serviços têm acervos inteiros para assistir quando quiser, sem pagar nada.',
-   onde:[['Pluto TV','https://pluto.tv/br'],['Mercado Play','https://play.mercadolivre.com.br/'],['Tela Brasil','https://telabrasil.cultura.gov.br/'],['Plex','https://watch.plex.tv/']]}
 ];
 function renderDestaques(){
   const ds=DESTAQUES.filter(d=>d.secoes.includes(section.id) && (!section.lock||liberado));
