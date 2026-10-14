@@ -1,5 +1,7 @@
 {
-  "data": "2026-10-12T02:02:57.469Z",
+  "data": "2026-10-14T10:08:37.216Z",
   "testados": 477,
-  "online": 261
+  "online": 346,
+  "sobDemanda": 28514,
+  "sobDemandaTestados": 28557
 }

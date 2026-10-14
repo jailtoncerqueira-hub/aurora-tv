@@ -1,0 +1,31 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="drama.archivewatch.org" tvg-name="Drama Theater" tvg-chno="1" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",Drama Theater
+https://archivewatch-pulse.benwilkoff.workers.dev/live/drama
+#EXTINF:-1 tvg-id="comedy.archivewatch.org" tvg-name="Comedy Hour" tvg-chno="2" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",Comedy Hour
+https://archivewatch-pulse.benwilkoff.workers.dev/live/comedy
+#EXTINF:-1 tvg-id="noir.archivewatch.org" tvg-name="Crime & Mystery" tvg-chno="3" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",Crime & Mystery
+https://archivewatch-pulse.benwilkoff.workers.dev/live/noir
+#EXTINF:-1 tvg-id="thrill.archivewatch.org" tvg-name="Thriller" tvg-chno="4" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",Thriller
+https://archivewatch-pulse.benwilkoff.workers.dev/live/thrill
+#EXTINF:-1 tvg-id="horror.archivewatch.org" tvg-name="Horror" tvg-chno="5" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",Horror
+https://archivewatch-pulse.benwilkoff.workers.dev/live/horror
+#EXTINF:-1 tvg-id="western.archivewatch.org" tvg-name="Western Trail" tvg-chno="6" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",Western Trail
+https://archivewatch-pulse.benwilkoff.workers.dev/live/western
+#EXTINF:-1 tvg-id="scifi.archivewatch.org" tvg-name="Sci-Fi Theater" tvg-chno="7" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",Sci-Fi Theater
+https://archivewatch-pulse.benwilkoff.workers.dev/live/scifi
+#EXTINF:-1 tvg-id="silent.archivewatch.org" tvg-name="Silent Cinema" tvg-chno="8" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",Silent Cinema
+https://archivewatch-pulse.benwilkoff.workers.dev/live/silent
+#EXTINF:-1 tvg-id="cartoon.archivewatch.org" tvg-name="Cartoon Classics" tvg-chno="9" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",Cartoon Classics
+https://archivewatch-pulse.benwilkoff.workers.dev/live/cartoon
+#EXTINF:-1 tvg-id="news.archivewatch.org" tvg-name="Newsreel Desk" tvg-chno="10" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",Newsreel Desk
+https://archivewatch-pulse.benwilkoff.workers.dev/live/news
+#EXTINF:-1 tvg-id="docs.archivewatch.org" tvg-name="Documentary" tvg-chno="11" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",Documentary
+https://archivewatch-pulse.benwilkoff.workers.dev/live/docs
+#EXTINF:-1 tvg-id="tv.archivewatch.org" tvg-name="Classic TV" tvg-chno="12" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",Classic TV
+https://archivewatch-pulse.benwilkoff.workers.dev/live/tv
+#EXTINF:-1 tvg-id="tv-comedy.archivewatch.org" tvg-name="TV Comedy" tvg-chno="13" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",TV Comedy
+https://archivewatch-pulse.benwilkoff.workers.dev/live/tv-comedy
+#EXTINF:-1 tvg-id="tv-drama.archivewatch.org" tvg-name="TV Drama" tvg-chno="14" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",TV Drama
+https://archivewatch-pulse.benwilkoff.workers.dev/live/tv-drama
+#EXTINF:-1 tvg-id="tv-western.archivewatch.org" tvg-name="TV Westerns" tvg-chno="15" tvg-logo="https://archivewatch.org/assets/app-icon/app-icon.png" group-title="Live Channels",TV Westerns
+https://archivewatch-pulse.benwilkoff.workers.dev/live/tv-western
