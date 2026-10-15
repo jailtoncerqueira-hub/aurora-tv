@@ -1,29 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <channels>
   <channel site="app.tvufop.com.br" lang="pt" xmltv_id="TVUFOP.br@HD" site_id="TVUFOP.br@HD">TV UFOP</channel>
+  <channel site="meuguia.tv" lang="pt" xmltv_id="Tooncast.us@SD" site_id="TOC">Tooncast</channel>
   <channel site="meo.pt" lang="pt" xmltv_id="TraceUrban.fr@SD" site_id="TRAHD">Trace Urban</channel>
   <channel site="meo.pt" lang="pt" xmltv_id="RecordNews.br@SD" site_id="RECNEW">Record News</channel>
   <channel site="meo.pt" lang="pt" xmltv_id="SICNoticias.pt@SD" site_id="SICN">SIC Notícias</channel>
   <channel site="tv.blue.ch" lang="pt" xmltv_id="TVIFiccao.pt@SD" site_id="1487">V+TVI</channel>
   <channel site="gatotv.com" lang="es" xmltv_id="BabyFirst.us@US" site_id="babyfirst_tv">Canal BabyFirst TV</channel>
   <channel site="gatotv.com" lang="es" xmltv_id="TNT.us@West" site_id="tnt_pacifico">Canal TNT (Pacífico)</channel>
+  <channel site="meo.pt" lang="pt" xmltv_id="EuronewsPortuguese.fr@SD" site_id="EURN">Euronews</channel>
   <channel site="mi.tv" lang="pt" xmltv_id="TraceBrazuca.fr@SD" site_id="br#trace-brazuca">Trace Brazuca</channel>
   <channel site="i.mjh.nz" lang="en" xmltv_id="XITENuevoLatino.us@SD" site_id="Plex/ca#647f8d22a2fc3fadb4721685-6889479e67ddc0ef2cdbf501">XITE Nuevo Latino</channel>
   <channel site="i.mjh.nz" lang="en" xmltv_id="XITESiempreLatino.us@SD" site_id="Plex/ca#647f8d22a2fc3fadb4721685-68800a594033a6a442ad9237">XITE Siempre Latino</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVHistoria.us@BR" site_id="PlutoTV/br#5f1ef1a8cec6be00072a7ac9">Pluto TV História</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVCozinha.us@BR" site_id="PlutoTV/br#5f1ef23020a5ac0007e5e8ea">Pluto TV Cozinha</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVEsportes.us@BR" site_id="PlutoTV/br#5f32d2db0af67400077f29c4">Pluto TV Esportes</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVViagens.us@BR" site_id="PlutoTV/br#5f32d432d612e50007e56133">Pluto TV Viagens</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="StarTrek.us@BR" site_id="PlutoTV/br#5f99ac4fded33000078f29ab">Pluto TV Star Trek</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVCineInspiracao.us@BR" site_id="PlutoTV/br#5fa991b1f09e020007e78626">Pluto TV Cine Inspiração</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVSeriesSciFi.us@BR" site_id="PlutoTV/br#63d2ba2f60bc8f0008981a0e">Pluto TV Séries Sci-Fi</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVNegocioFechado.us@BR" site_id="PlutoTV/br#64ad7394798def00087b2bfe">Pluto TV Negócio Fechado</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVCanalUOL.us@BR" site_id="PlutoTV/br#64b9370b409629000802d32b">Pluto TV Canal UOL</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVSeriesDrama.us@BR" site_id="PlutoTV/br#65f060d84e01740008d7421f">Pluto TV Séries Drama</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVTerrorTrash.us@BR" site_id="PlutoTV/br#66aa67493a4ad2000806d91b">Pluto TV Terror Trash</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVKidsClub.us@BR" site_id="PlutoTV/br#66c8cae7fed35b0008580ec0">Pluto TV Kids Club</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVFilmesAventura.us@BR" site_id="PlutoTV/br#66c79a4262e5510008ff68a5">Pluto TV Filmes Aventura</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVKFOOD.us@BR" site_id="PlutoTV/br#633ee9ba83c08f00076b60a6">Pluto TV KFOOD</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVSeriesComedia.us@BR" site_id="PlutoTV/br#655e5bc94261ca000810cb17">Pluto TV Séries Comédia</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVDesenhosClassicos.us@BR" site_id="PlutoTV/br#655e5c4d2c46f3000877a54b">Pluto TV Desenhos Clássicos</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVBangBang.us@BR" site_id="PlutoTV/br#663b9dc7cb3ea10008f1a0ce">Pluto TV Bang Bang</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVNetmovies.us@BR" site_id="PlutoTV/br#663b9de4f999220008230fa8">Pluto TV Netmovies</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVPolicial.us@BR" site_id="PlutoTV/br#678fdf9e3de7c8cf948e8824">Pluto TV Policial</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVRecordNews.us@BR" site_id="PlutoTV/br#6102e04e9ab1db0007a980a1">Pluto TV Record News</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVAnimais.us@BR" site_id="PlutoTV/br#6474aa984cfc2c0008883a92">Pluto TV Animais</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVSeriesAcao.us@BR" site_id="PlutoTV/br#6474ab1da51cb80008bfb5f4">Pluto TV Séries Ação</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVSeriesCriminais.us@BR" site_id="PlutoTV/br#6474ab5cdc7a760008745008">Pluto TV Séries Criminais</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVCineCrime.us@BR" site_id="PlutoTV/br#6479ff764f5ba5000878dfe2">Pluto TV Cine Crime</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVAliens.us@BR" site_id="PlutoTV/br#6806d65e84f24b70109485fa">Pluto TV Aliens</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVFilmesdeLuta.us@BR" site_id="PlutoTV/br#6806d62369aec5b19cd628c0">Pluto TV Filmes de Luta</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVCineComediaRomantica.us@BR" site_id="PlutoTV/br#62545ed3dab4380007582f7c">Pluto TV Cine Comédia Romântica</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVSeriesNovelescas.us@BR" site_id="PlutoTV/br#691627e4a29a6123e400b3e0">Pluto TV Séries Novelescas</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVTurbo.us@BR" site_id="PlutoTV/br#6014761dfb91870008ea6463">Pluto TV Turbo</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="AdrenalinaPuraTV.us@Brazil" site_id="PlutoTV/br#61b790b985706b00072cb797">Adrenalina Pura TV</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="BETPlutoTV.us@BR" site_id="PlutoTV/br#5ff768b6a4c8b80008498610">BET Pluto TV</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="BMCNews.br@SD" site_id="PlutoTV/br#666c9c60a7efd40008f552f0">BM&amp;amp;C News</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="CineTerror.us@BR" site_id="PlutoTV/br#5f12111c9e6c2c00078ef3bb">Pluto TV Cine Terror</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="ComedyCentralPlutoTV.us@BR" site_id="PlutoTV/br#5f357e91b18f0b00073583d2">Comedy Central Pluto TV</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="FailArmy.us@Brazil" site_id="PlutoTV/br#5f5141c1605ddf000748eb1b">FailArmy</channel>
   <channel site="i.mjh.nz" lang="pt" xmltv_id="JovemPanNews.br@SD" site_id="PlutoTV/br#6317ba014d4d040007227f72">Jovem Pan NEWS</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="MasterChef.us@Brazil" site_id="PlutoTV/br#6077045b6031bd00078de127">MasterChef</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="MTVPlutoTV.us@BR" site_id="PlutoTV/br#5f1212fb81e85c00077ae9ef">MTV Pluto TV</channel>
   <channel site="i.mjh.nz" lang="pt" xmltv_id="Naruto.us@Brazil" site_id="PlutoTV/br#5f6df5a173d7340007c559f7">Naruto</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="OEncantadordeCaes.us@Brazil" site_id="PlutoTV/br#61099df8cee03b00074b2ecf">O Encantador de Cães</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="OReinoInfantil.us@Brazil" site_id="PlutoTV/br#5f5c216df68f920007888315">O Reino Infantil</channel>
   <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVAnime.us@BR" site_id="PlutoTV/br#5f12136385bccc00070142ed">Pluto TV Anime</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVAnimeAcao.us@BR" site_id="PlutoTV/br#604b79c558393100078faeef">Pluto TV Anime Ação</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVCineClassicos.us@BR" site_id="PlutoTV/br#5fa1612a669ba0000702017b">Pluto TV Cine Clássicos</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVCineComedia.us@BR" site_id="PlutoTV/br#5f12101f0b12f00007844c7c">Pluto TV Cine Comédia</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVCineDrama.us@BR" site_id="PlutoTV/br#5f1210d14ae1f80007bafb1d">Pluto TV Cine Drama</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVCineFamilia.us@BR" site_id="PlutoTV/br#5f171f032cd22e0007f17f3d">Pluto TV Cine Família</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVCineRomance.us@BR" site_id="PlutoTV/br#5f171f988ab9780007fa95ea">Pluto TV Cine Romance</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVCineSucessos.us@BR" site_id="PlutoTV/br#5f120e94a5714d00074576a1">Pluto TV Cine Sucessos</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVFiccaoCientifica.us@BR" site_id="PlutoTV/br#5fa15ad6367e170007cdd098">Pluto TV Ficção Científica</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVFilmesAcao.us@BR" site_id="PlutoTV/br#5f120f41b7d403000783a6d6">Pluto TV Filmes Ação</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVFilmesNacionais.us@BR" site_id="PlutoTV/br#5f5a545d0dbf7f0007c09408">Pluto TV Filmes Nacionais</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVInvestigacao.us@BR" site_id="PlutoTV/br#5f32cf37c9ff2b00082adbc8">Pluto TV Investigação</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVJunior.us@BR" site_id="PlutoTV/br#5f12141b146d760007934ea7">Pluto TV Junior</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVKids.us@BR" site_id="PlutoTV/br#5f1214a637c6fd00079c652f">Pluto TV Kids</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVMisterios.us@BR" site_id="PlutoTV/br#5fac52f142044f00078e2a51">Pluto TV Mistérios</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVNatureza.us@BR" site_id="PlutoTV/br#5f1213ba0ecebc00070e170f">Pluto TV Natureza</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVNovelas.us@BR" site_id="PlutoTV/br#5f512365abe1f50007d3ff56">Pluto TV Novelas</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVPaisagensporStingray.us@BR" site_id="PlutoTV/br#604a8dedbca75b0007b1c753">Pluto TV Paisagens por Stingray</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVRetro.us@BR" site_id="PlutoTV/br#5f1212ad1728050007a523b8">Pluto TV Retrô</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVShowsporStingray.us@BR" site_id="PlutoTV/br#604b91e0692f770007d9f33f">Pluto TV Shows por Stingray</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="PlutoTVVidaReal.us@BR" site_id="PlutoTV/br#5f32d4d9ec194100070c7449">Pluto TV Vida Real</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="ProntosocorroHistoriasDeEmergencia.us@Brazil" site_id="PlutoTV/br#61bb72a7bf8c520007a8fd27">Pronto-socorro: Histórias De Emergência</channel>
   <channel site="i.mjh.nz" lang="pt" xmltv_id="SmithsonianChannelPlutoTV.us@BR" site_id="PlutoTV/br#6298bd10d88ef000073f16b7">Smithsonian Channel Pluto TV</channel>
-  <channel site="m.tv.sms.cz" lang="cs" xmltv_id="JimJamEurope.uk@SD" site_id="Jim+Jam">Jim Jam</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="TastemadeBrasil.us@Brazil" site_id="PlutoTV/br#5fd1419a3b4f4b000773ba85">Tastemade</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="ThePetCollective.us@Brazil" site_id="PlutoTV/br#5f515ebac01c0f00080e8439">The Pet Collective</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="Tokusato.us@Brazil" site_id="PlutoTV/br#5ff609de50ab210008025c1b">Tokusato</channel>
+  <channel site="i.mjh.nz" lang="pt" xmltv_id="TurmadaMonica.us@Brazil" site_id="PlutoTV/br#5f997e44949bc70007a6941e">Turma da Mônica</channel>
   <channel site="meuguia.tv" lang="pt" xmltv_id="StudioUniversalLatinAmerica.us@Brazil" site_id="HAL">Studio Universal</channel>
   <channel site="meo.pt" lang="pt" xmltv_id="ARTV.pt@SD" site_id="ARTV">ARTV</channel>
   <channel site="meo.pt" lang="pt" xmltv_id="AXNMovies.pt@SD" site_id="AXNMHD">AXN Movies</channel>
   <channel site="meo.pt" lang="pt" xmltv_id="CNNPortugal.pt@SD" site_id="CNNPT">CNN Portugal</channel>
-  <channel site="meo.pt" lang="pt" xmltv_id="DisneyChannel.pt@SD" site_id="DISNY">Disney Channel</channel>
   <channel site="meo.pt" lang="pt" xmltv_id="KuriakosTV.pt@SD" site_id="KURIAKO">Kuriakos TV</channel>
   <channel site="meo.pt" lang="pt" xmltv_id="PortoCanal.pt@SD" site_id="PORTO">Porto Canal</channel>
   <channel site="meo.pt" lang="pt" xmltv_id="RedeGlobo.br@SD" site_id="GLOB">Globo</channel>
   <channel site="meo.pt" lang="pt" xmltv_id="RTP1.pt@HD" site_id="RTP1">RTP1</channel>
+  <channel site="meo.pt" lang="pt" xmltv_id="RTP2.pt@HD" site_id="RTP2">RTP2</channel>
   <channel site="meo.pt" lang="pt" xmltv_id="RTPAcores.pt@HD" site_id="RTPACR">RTP Açores</channel>
   <channel site="meo.pt" lang="pt" xmltv_id="RTPAfrica.pt@SD" site_id="RTPA">RTP África</channel>
   <channel site="meo.pt" lang="pt" xmltv_id="RTPMemoria.pt@SD" site_id="RTPM">RTP Memória</channel>
@@ -51,15 +116,11 @@
   <channel site="meuguia.tv" lang="pt" xmltv_id="RedeTV.br@SD" site_id="RTV">Rede TV</channel>
   <channel site="meuguia.tv" lang="pt" xmltv_id="TVSenado.br@SD" site_id="SEN">TV Senado</channel>
   <channel site="meuguia.tv" lang="pt" xmltv_id="SonyChannel.br@SD" site_id="SET">Sony</channel>
-  <channel site="meuguia.tv" lang="pt" xmltv_id="SporTV2.br@SD" site_id="SP2">SporTV 2</channel>
-  <channel site="meuguia.tv" lang="pt" xmltv_id="SporTV3.br@SD" site_id="SP3">SporTV 3</channel>
-  <channel site="meuguia.tv" lang="pt" xmltv_id="SporTV.br@SD" site_id="SPO">SporTV</channel>
   <channel site="meuguia.tv" lang="pt" xmltv_id="TVAparecida.br@SD" site_id="TAP">TV Aparecida (aberta)</channel>
   <channel site="meuguia.tv" lang="pt" xmltv_id="TelecineAction.br@SD" site_id="TC2">Telecine Action</channel>
   <channel site="meuguia.tv" lang="pt" xmltv_id="TVBrasil.br@SD" site_id="TED">TV Brasil</channel>
   <channel site="meuguia.tv" lang="pt" xmltv_id="TNTLatinAmerica.us@Brazil" site_id="TNT">TNT</channel>
   <channel site="meuguia.tv" lang="pt" xmltv_id="TravelBoxBrazil.br@SD" site_id="TRB">Travel Box Brazil</channel>
-  <channel site="meuguia.tv" lang="pt" xmltv_id="TLCLatinAmerica.us@Brazil" site_id="TRV">TLC</channel>
   <channel site="meuguia.tv" lang="pt" xmltv_id="TerraViva.br@SD" site_id="TVV">Terra Viva</channel>
   <channel site="meuguia.tv" lang="pt" xmltv_id="RedeVida.br@SD" site_id="VDA">Rede Vida</channel>
   <channel site="meuguia.tv" lang="pt" xmltv_id="WooHoo.br@SD" site_id="WOO">Woohoo</channel>
@@ -71,7 +132,6 @@
   <channel site="mi.tv" lang="pt" xmltv_id="RedeCNTRiodeJaneiro.br@SD" site_id="br#cnt-rio-hd">CNT Rio HD</channel>
   <channel site="mi.tv" lang="pt" xmltv_id="DiscoveryKidsLatinAmerica.us@Brazil" site_id="br#discovery-kids">Discovery Kids</channel>
   <channel site="mi.tv" lang="pt" xmltv_id="TVParanaTurismo.br@SD" site_id="br#e-parana-hd">E-Paraná HD</channel>
-  <channel site="mi.tv" lang="pt" xmltv_id="FishTV.br@SD" site_id="br#fishtv">FishTV</channel>
   <channel site="mi.tv" lang="pt" xmltv_id="TVBahia.br@HD" site_id="br#globo-tv-bahia">Globo TV Bahia</channel>
   <channel site="mi.tv" lang="pt" xmltv_id="History2LatinAmerica.us@Brazil" site_id="br#h2">History 2</channel>
   <channel site="mi.tv" lang="pt" xmltv_id="History.br@SD" site_id="br#history-channel">History Channel</channel>
@@ -96,8 +156,7 @@
   <channel site="mi.tv" lang="pt" xmltv_id="TVACritica.br@SD" site_id="br#tv-a-critica">TV A Crítica</channel>
   <channel site="mi.tv" lang="pt" xmltv_id="TVCidadeVerdeCuiaba.br@SD" site_id="br#tv-cidade-verde-hd">TV Cidade Verde HD</channel>
   <channel site="mi.tv" lang="pt" xmltv_id="TVClube.br@SD" site_id="br#tv-clube">TV Clube</channel>
-  <channel site="mi.tv" lang="pt" xmltv_id="TVERS.br@SD" site_id="br#tve-1">TVE</channel>
-  <channel site="mi.tv" lang="pt" xmltv_id="TVEBahia.br@SD" site_id="br#tve-bahia">TVE Bahia</channel>
+  <channel site="mi.tv" lang="pt" xmltv_id="TVGuara.br@SD" site_id="br#tv-guara-hd">TV Guará HD</channel>
   <channel site="nostv.pt" lang="pt" xmltv_id="TraceToca.fr@SD" site_id="543">Trace Toca</channel>
   <channel site="opto.sic.pt" lang="pt" xmltv_id="SICAltaDefinicao.pt@SD" site_id="549519c3-31fa-42de-a621-15e981082fd9">SIC Alta Definição</channel>
   <channel site="opto.sic.pt" lang="pt" xmltv_id="SICReplay.pt@SD" site_id="d47400e0-19d9-4f71-94f4-2b4cfdc1a2ca">SIC Replay</channel>
